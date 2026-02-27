@@ -1,0 +1,394 @@
+/* ============================================================================
+   ESTILOS DO JOGO TERRARIA 2D
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+/* ============================================================================
+   HEADER
+   ============================================================================ */
+
+.game-header {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    padding: 15px 20px;
+    border-bottom: 2px solid #00d4ff;
+    box-shadow: 0 4px 10px rgba(0, 212, 255, 0.2);
+}
+
+.game-header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #00d4ff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.game-info {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.label {
+    font-weight: bold;
+    color: #00d4ff;
+}
+
+.health-bar {
+    width: 200px;
+    height: 20px;
+    background: #333;
+    border: 2px solid #00d4ff;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ff6600);
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.health-text {
+    font-weight: bold;
+    color: #ff6600;
+    min-width: 60px;
+}
+
+/* ============================================================================
+   CANVAS DO JOGO
+   ============================================================================ */
+
+.game-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+#gameCanvas {
+    background: linear-gradient(180deg, #87ceeb 0%, #e0f6ff 100%);
+    border: 3px solid #00d4ff;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.game-footer {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    padding: 15px 20px;
+    border-top: 2px solid #00d4ff;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    box-shadow: 0 -4px 10px rgba(0, 212, 255, 0.2);
+}
+
+/* ============================================================================
+   CONTROLES
+   ============================================================================ */
+
+.controls {
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #00d4ff;
+}
+
+.control-group {
+    margin-bottom: 10px;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+.control-group h3 {
+    color: #00d4ff;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.control-group p {
+    font-size: 12px;
+    color: #ccc;
+    margin-bottom: 5px;
+}
+
+.control-group p:last-child {
+    margin-bottom: 0;
+}
+
+button {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* ============================================================================
+   INVENTÁRIO
+   ============================================================================ */
+
+.inventory-panel {
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #00d4ff;
+    min-width: 300px;
+}
+
+.inventory-panel h3 {
+    color: #00d4ff;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+}
+
+.inventory-slot {
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #666;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    font-size: 11px;
+    color: #00d4ff;
+    font-weight: bold;
+}
+
+.inventory-slot:hover {
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.inventory-slot.selected {
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.inventory-slot.empty {
+    opacity: 0.5;
+}
+
+.slot-item {
+    text-align: center;
+    font-size: 10px;
+}
+
+.slot-icon {
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.slot-amount {
+    font-size: 10px;
+    color: #ffff00;
+}
+
+/* ============================================================================
+   CRAFTING
+   ============================================================================ */
+
+.crafting-panel {
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #00d4ff;
+    max-width: 400px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.crafting-panel h3 {
+    color: #00d4ff;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.crafting-recipes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.recipe-item {
+    background: rgba(0, 212, 255, 0.1);
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #00d4ff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 12px;
+}
+
+.recipe-item:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateX(3px);
+}
+
+.recipe-name {
+    color: #00d4ff;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.recipe-ingredients {
+    color: #aaa;
+    font-size: 11px;
+    margin-bottom: 3px;
+}
+
+.recipe-button {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: #000;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 11px;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.recipe-button:hover {
+    transform: translateY(-1px);
+}
+
+.recipe-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================================================
+   SCROLLBAR CUSTOMIZADO
+   ============================================================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00d4ff;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ffff;
+}
+
+/* ============================================================================
+   RESPONSIVIDADE
+   ============================================================================ */
+
+@media (max-width: 1024px) {
+    .game-footer {
+        flex-direction: column;
+    }
+
+    .inventory-grid {
+        grid-template-columns: repeat(10, 1fr);
+    }
+
+    .inventory-slot {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-header h1 {
+        font-size: 20px;
+    }
+
+    .game-info {
+        gap: 15px;
+    }
+
+    .health-bar {
+        width: 120px;
+    }
+
+    .controls {
+        display: none;
+    }
+
+    .inventory-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .inventory-slot {
+        width: 40px;
+        height: 40px;
+    }
+}
