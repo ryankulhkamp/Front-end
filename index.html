@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elden Ring - Página Informativa</title>
-
-    <!-- Fonte -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-
+    <title>Terraria 2D</title>
     <style>
         * {
             margin: 0;
@@ -16,164 +12,108 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #0f0f0f;
-            color: #f5f5f5;
-            line-height: 1.6;
-        }
-
-        header {
-            background: url('https://images.alphacoders.com/115/1151249.jpg') center/cover no-repeat;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-        }
-
-        header h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
-            color: #d4af37;
-            text-shadow: 2px 2px 10px #000;
-        }
-
-        nav {
+            min-height: 100vh;
             background: #1a1a1a;
-            padding: 15px;
-            text-align: center;
-            position: sticky;
-            top: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
-        nav a {
-            color: #d4af37;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+        #gameContainer {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+            overflow: hidden;
         }
 
-        nav a:hover {
-            color: #fff;
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
-        section {
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin: auto;
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
         }
 
-        h2 {
-            font-family: 'Cinzel', serif;
-            color: #d4af37;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .card-container {
+        #inventory {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(5, 40px);
+            gap: 5px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 10;
         }
 
-        .card {
-            background: #1c1c1c;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-            transition: 0.3s;
+        .slot {
+            width: 40px;
+            height: 40px;
+            background: rgba(100, 100, 100, 0.6);
+            border: 2px solid #444;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        .slot:hover {
+            background: rgba(150, 150, 150, 0.8);
+            border-color: #888;
         }
 
-        footer {
-            background: #1a1a1a;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #aaa;
+        .slot.selected {
+            border-color: #ffff00;
+            background: rgba(200, 200, 0, 0.6);
         }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
+        #controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: white;
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: right;
+            z-index: 10;
         }
     </style>
 </head>
-
 <body>
-
-    <header>
-        <h1>ELDEN RING</h1>
-    </header>
-
-    <nav>
-        <a href="#sobre">Sobre</a>
-        <a href="#historia">História</a>
-        <a href="#gameplay">Gameplay</a>
-        <a href="#classes">Classes</a>
-    </nav>
-
-    <section id="sobre">
-        <h2>Sobre o Jogo</h2>
-        <p>
-            Elden Ring é um RPG de ação desenvolvido pela FromSoftware e publicado pela Bandai Namco.
-            Lançado em 2022, o jogo combina mundo aberto com o combate desafiador característico da série Souls.
-            Foi dirigido por Hidetaka Miyazaki com colaboração de George R. R. Martin.
-        </p>
-    </section>
-
-    <section id="historia">
-        <h2>História</h2>
-        <p>
-            Nas Terras Intermédias, o Anel Prístino foi destruído e seus fragmentos espalhados.
-            Você assume o papel de um Maculado, que deve restaurar o Anel e se tornar o Lorde Prístino.
-            A narrativa é profunda, misteriosa e contada através da exploração e descrições de itens.
-        </p>
-    </section>
-
-    <section id="gameplay">
-        <h2>Gameplay</h2>
-        <div class="card-container">
-            <div class="card">
-                <h3>Mundo Aberto</h3>
-                <p>Explore livremente as vastas Terras Intermédias.</p>
-            </div>
-            <div class="card">
-                <h3>Combate Estratégico</h3>
-                <p>Sistema de combate desafiador e técnico.</p>
-            </div>
-            <div class="card">
-                <h3>Chefes Épicos</h3>
-                <p>Enfrente inimigos poderosos e memoráveis.</p>
-            </div>
-            <div class="card">
-                <h3>Multiplayer</h3>
-                <p>Modo cooperativo e invasões PvP online.</p>
-            </div>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui">
+            <div>Posição: <span id="posX">0</span>, <span id="posY">0</span></div>
+            <div>Blocos: <span id="blockCount">0</span></div>
         </div>
-    </section>
-
-    <section id="classes">
-        <h2>Classes Iniciais</h2>
-        <div class="card-container">
-            <div class="card"><h3>Samurai</h3><p>Especialista em destreza e combate ágil.</p></div>
-            <div class="card"><h3>Herói</h3><p>Forte em combate corpo a corpo.</p></div>
-            <div class="card"><h3>Astrólogo</h3><p>Focado em magias e feitiços.</p></div>
-            <div class="card"><h3>Confessor</h3><p>Equilíbrio entre fé e combate físico.</p></div>
+        <div id="inventory"></div>
+        <div id="controls">
+            <div>← → Mover | ESPAÇO Pular</div>
+            <div>Clique Minerar | Shift+Clique Colocar</div>
+            <div>1-5 Selecionar bloco</div>
         </div>
-    </section>
+    </div>
 
-    <footer>
-        © 2026 - Página criada para fins educativos | Elden Ring é propriedade da FromSoftware e Bandai Namco.
-    </footer>
-
+    <script src="game.js"></script>
 </body>
 </html>
